@@ -18,9 +18,10 @@
 
 两个链表按顺序取值并求和，用一个变量存进位即可。
 
-	class ListNode(var `val`: Int) {
-        var next: ListNode? = null
-    }
+```kotlin
+class ListNode(var `val`: Int) {
+	var next: ListNode? = null
+}
 
 	fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
 		var result = ListNode(0)
@@ -44,6 +45,7 @@
 		if (sum / 10 != 0) t.next = ListNode(1)
 		return result.next
 	}
+```
 
 ## 扩展：
 
