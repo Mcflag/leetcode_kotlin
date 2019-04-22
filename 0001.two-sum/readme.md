@@ -15,16 +15,18 @@
 
 一种方法是直接暴力循环查，另一种是用HashMap的方式查。
 
-	fun twoSum(nums: IntArray, target: Int): IntArray {
-		val numMap = mutableMapOf<Int, Int>()
-		for ((i, v) in nums.withIndex()) {
-			if (numMap.contains(v)) {
-				return intArrayOf(numMap[v]!!, i)
-			}
-			numMap[target - v] = i
+```kotlin
+fun twoSum(nums: IntArray, target: Int): IntArray {
+	val numMap = mutableMapOf<Int, Int>()
+	for ((i, v) in nums.withIndex()) {
+		if (numMap.contains(v)) {
+			return intArrayOf(numMap[v]!!, i)
 		}
-		return intArrayOf()
+		numMap[target - v] = i
 	}
+	return intArrayOf()
+}
+```
 
 
 
