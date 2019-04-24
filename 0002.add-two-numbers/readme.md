@@ -55,7 +55,7 @@ fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
 
 	(3 -> 4 -> 2) + (4 -> 6 -> 5) = 8 -> 0 -> 7
 
-对于这个问题首先考虑的是归化成刚才解决的问题，实际就是将两个链表倒序之后按照上面的方法相加即可。倒序的方法如下：
+对于这个问题首先考虑的是归化成刚才解决的问题，实际就是将两个链表倒序之后按照上面的方法相加即可。链表倒序的方法如下：
 
 ```kotlin
 fun reverseLinkedList(head: ListNode?): ListNode? {
