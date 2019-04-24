@@ -28,9 +28,9 @@
 
 A数组有m个数，B数组有n个数，在i位置分割A数组，在j位置分割B数组，所以有
 
-left_part          		 |  right_part
-A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
-B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+	      left_part          |         right_part
+	A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
+	B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
 
 满足len(left_part)等于len(right_part)或者等于len(right_part)+1，如果i在0到m的范围内，根据这个公式能够将j用m，n，i进行表示。
 
