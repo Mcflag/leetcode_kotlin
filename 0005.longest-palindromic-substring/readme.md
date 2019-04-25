@@ -15,15 +15,26 @@
 	输入: "cbbd"
 	输出: "bb"
 
-## 解答：
+## 解答一：
 
-这个问题有许多种解法：
-
-1. 暴力解法1，枚举每一个子字符串，判断其是否为回文串，算法复杂度为 O(n^3)。
-2. 暴力解法2，以每一个字符或字符间的空隙作为回文中心，向左右拓展，算法复杂度为 O(n^2)。
+暴力解法，枚举每一个子字符串，判断其是否为回文串，算法复杂度为 O(n^3)。
 
 ```kotlin
-
+fun longestPalindrome(s: String): String {
+	var ans = ""
+	var max = 0
+	var len = s.length
+	for (i in 0 until len) {
+		for (j in i + 1..len) {
+			var str = s.substring(i, j)
+			if (isPalindromic(str) && str.length > max) {
+				ans = str
+				max = Math.max(max, ans.length)
+			}
+		}
+	}
+	return ans
+}
 ```
 
 
