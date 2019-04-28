@@ -115,4 +115,77 @@ fun expandAroundCenter(s: String, left: Int, right: Int): Int {
 
 ## 解答四：
 
-Manacher's Algorithm，这个算法将复杂度降低到了线性，也就是时间复杂度是 O(n)，空间复杂度也是 O(n)。
+Manacher's Algorithm，这个算法将复杂度降低到了线性，也就是时间复杂度是 O(n)，空间复杂度也是 O(n)。算法思路是：
+
+1. 对字符串预处理，每个字符间增加#号，这是为了统一奇数长度和偶数长度的字符串，头尾各增加不一样的字符^和&，目的是为了防止越界。如：
+
+	"cbcbcbde"扩展成为"^#c#b#c#b#c#b#d#e#$"
+	
+2. 按顺序遍历字符串，每一个字符向两边扩展比较，用一个数组保存每个位置向两边扩展得到的回文串的长度半径。
+
+	"^#a#b#b#a#$"保存一个数组P=[0,0,1,0,1,4,1,0,1,0,0]
+
+3. 没找到一个回文串时，就能够得到一个中点C，回文串左边界L，右边界R，C点左边的P的值是知道的，要求C点右边的P值。
+
+4. 如果i在C到R之间，那么L到C之间有i的镜像点i_mirror，且P[i_mirror]的值是知道的。可以直接P[i]=P[i_mirror]减少循环。
+
+5. 有几种情况不能直接赋值，一个是i点的回文右边界超出了R，这种情况下可以断定回文长度至少是R-i，在R之外的点是否仍然是回文还需要暴力查。
+
+	这时可以用P[i]=Math.min(R-i, P[i_mirror])统一处理i点回文串右边界小于等于R，或者超过R的情况。
+
+6. 第二种是i_mirror超出了字符串左边界的情况，所以需要接着暴力查进行扩展。
+
+7. 第三种是i等于R或者超出了R，这种情况先初始化P[i]=0，然后正常扩展，查询结束之后重新设置C和边界R。
+
+8. 最后从得到的P数组中得到最大值的下标i，以及最大值P[i]，那么元字符串中的回文串开始的索引start=(i-P[i])/2，回文串长度为P[i]。
+
+虽然算法中感觉有两个循环，一个是外部按字符串索引，另一个是在每个索引处进行扩展比较，但是实际上每次都是从R+1开始扩展，随后就改变了R，那么每个字符最多只遍历了2次，当然如果原字符串长度为n，我们总共遍历2*(2n+3)次，即使算上后面遍历P数组找最大的遍历，总算法仍然是线性的。所以算法复杂度确实是 O(n)。
+
+
+```kotlin
+fun preProcess(s: String): String {
+	if (s.length == 0) {
+		return "^$"
+	}
+	var result = "^"
+	for (a in s) {
+		result += "#$a"
+	}
+	result += "#$"
+	return result
+}
+fun longestPalindrome(s: String): String {
+	var str = preProcess(s)
+	var n = str.length
+	var p = IntArray(n)
+	var c = 0
+	var r = 0
+	for (i in 1 until n - 1) {
+		var i_mirror = 2 * c - i
+		if (r > i) {
+			p[i] = Math.min(r - i, p[i_mirror]) //防止超出r
+		} else {
+			p[i] = 0 //r=i的情况
+		}
+		while (str[i + 1 + p[i]] == str[i - 1 - p[i]]) {
+			p[i]++
+		}
+		if (i + p[i] > r) {
+			c = i
+			r = i + p[i]
+		}
+	}
+	var maxLen = 0
+	var centerIndex = 0
+	for (i in 1 until n - 1) {
+		if (p[i] > maxLen) {
+			maxLen = p[i]
+			centerIndex = i
+		}
+	}
+	var start = (centerIndex - maxLen) / 2
+	return s.substring(start, start + maxLen)
+}
+```
+
+
