@@ -22,9 +22,21 @@
 
 ## 解答：
 
+本题思路就是把数不停除10取余，然后再result中乘10加起来。主要考的应该是对溢出的处理。偷懒的办法是用Long来存result，最后用result与Int的最大值和最小值比较，溢出就返回0。
+
+另外就是result的每一位与Int的最大值和最小值的每一位进行比较，如果判断溢出就返回0。
+
 ```kotlin
 fun reverse(x: Int): Int {
-
+	var temp = x
+	var result: Long = 0
+	while (temp != 0) {
+		var pop = temp % 10
+		temp /= 10
+		result = result * 10 + pop
+	}
+	if (result > Int.MAX_VALUE || result < Int.MIN_VALUE) return 0
+	return result.toInt()
 }
 ```
 
