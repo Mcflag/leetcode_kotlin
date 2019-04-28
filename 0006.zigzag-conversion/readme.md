@@ -63,9 +63,9 @@ fun convert(s: String, numRows: Int): String {
 
 对于所有整数k，
 
-* 行0中的字符位于索引k*(2*numRows-2)处;
-* 行numRows−1中的字符位于索引k(2*numRows−2)+numRows−1处;
-* 内部的行i中的字符位于索引k(2*numRows−2)+i以及(k+1)(2*numRows−2)−i处;
+* 行0中的字符位于索引`k*(2*numRows-2)`处;
+* 行numRows−1中的字符位于索引`k(2*numRows−2)+numRows−1`处;
+* 内部的行i中的字符位于索引`k(2*numRows−2)+i`以及`(k+1)(2*numRows−2)−i`处;
 
 算法复杂度是 O(n)，空间复杂度是 O(n)。
 
