@@ -59,11 +59,19 @@ fun convert(s: String, numRows: Int): String {
 
 ## 解答二：
 
-还有一种方式是直接通过下标找规律，考虑普通的情况，需要numRows行的话就是每隔2*numRows-2字符作为一个周期。按周期取值即可，注意判断一下最后多余的字符，下标不要越界即可。算法复杂度是 O(n)，空间复杂度是 O(n)。
+还有一种方式是按照与逐行读取Z字形图案相同的顺序访问字符串。首先访问行0中的所有字符，接着访问行1，然后行2，依此类推...
+
+对于所有整数k，
+
+* 行0中的字符位于索引k*(2*numRows-2)处;
+* 行numRows−1中的字符位于索引k(2*numRows−2)+numRows−1处;
+* 内部的行i中的字符位于索引k(2*numRows−2)+i以及(k+1)(2*numRows−2)−i处;
+
+算法复杂度是 O(n)，空间复杂度是 O(n)。
 
 ```kotlin
 fun convert1(s: String, numRows: Int): String {
-	if (s.length == 1) return s
+	if (numRows == 1) return s
 	var result = StringBuilder()
 	var len = s.length
 	var cycleLen = 2 * numRows - 2
