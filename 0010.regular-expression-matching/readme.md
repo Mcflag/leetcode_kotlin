@@ -52,11 +52,26 @@
 	p = "mis*is*p*."
 	输出: false
 
-## 解答：
+## 解答一：
+
+递归比较，按顺序一个一个比较。没有符号的情况下string取一个字符，pattern取一个字符比较；有“.”的情况下直接跳过一位；有“`*`”的情况分两种，一是pattern直接跳过2位，比如“c`*`”可以匹配0个c，二是直接跳过一位，但是pattern不用跳过仍然比较“`*`”号前的一个字母。
 
 ```kotlin
-
+fun isMatch(s: String, p: String): Boolean {
+	if (p.isEmpty()) return s.isEmpty()
+	var b = !s.isEmpty() && (p[0] == s[0] || p[0] == '.')
+	if (p.length >= 2 && p[1] == '*') {
+		return isMatch(s, p.substring(2)) || (b && isMatch(s.substring(1), p))
+	} else {
+		return b && isMatch(s.substring(1), p.substring(1))
+	}
+}
 ```
+
+## 解答二：
+
+动态规划
+
 
 
 
