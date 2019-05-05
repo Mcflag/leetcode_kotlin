@@ -46,10 +46,36 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 
 ## 解答：
 
-
+按照罗马数字按位加即可，利用到罗马数字的规则，一般情况是表示数字大的字母在前，数字小的字母在后。如果数字大的在后，小的在前则需要做减法，大的数减去小的数。
 
 ```kotlin
-
+fun romanToInt(s: String): Int {
+	var result = 0
+	val valueMap = mapOf(
+		Pair('M', 1000),
+		Pair('D', 500),
+		Pair('C', 100),
+		Pair('L', 50),
+		Pair('X', 10),
+		Pair('V', 5),
+		Pair('I', 1)
+	)
+	if (s.isEmpty()) return result
+	for (i in 0 until s.length) {
+		val cur = valueMap[s[i]] ?: 0
+		if (i == s.length - 1) {
+			result += cur
+		} else {
+			val next = valueMap[s[i + 1]] ?: 0
+			if (cur < next) {
+				result -= cur
+			} else {
+				result += cur
+			}
+		}
+	}
+	return result
+}
 ```
 
 
