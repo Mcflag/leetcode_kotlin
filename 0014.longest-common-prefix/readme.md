@@ -43,7 +43,9 @@ fun longestCommonPrefix(strs: Array<String>): String {
 	}
 	return strs.first().substring(0, (low + high) / 2)
 }
+```
 
+```kotlin
 fun isCommonPrefix(strs: Array<String>, prefixLen: Int): Boolean {
 	if (prefixLen == 0) return false
 	val prefix = strs.first().substring(0, prefixLen)
