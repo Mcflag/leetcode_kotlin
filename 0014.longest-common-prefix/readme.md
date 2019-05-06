@@ -188,7 +188,7 @@ class Trie {
 		val prefix = StringBuilder()
 		for (i in 0 until word.length) {
 			val curLetter = word[i]
-			if (node.containsKey(curLetter) && node.size === 1 && !node.isEnd) {
+			if (node.containsKey(curLetter) && node.size == 1 && !node.isEnd) {
 				prefix.append(curLetter)
 				node = node.getLink(curLetter)!!
 			} else
