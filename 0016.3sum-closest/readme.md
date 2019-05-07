@@ -10,10 +10,30 @@
 
 ## 解答：
 
-
+与15题一样，先排序，再从头和尾两端开始查。时间复杂度O(n^2)，空间复杂度O(1)。
 
 ```kotlin
-
+fun threeSumClosest(nums: IntArray, target: Int): Int {
+	nums.sort()
+	var sub = Int.MAX_VALUE
+	var sum = 0
+	for (i in 0 until nums.size) {
+		var lo = i + 1
+		var hi = nums.size - 1
+		while (lo < hi) {
+			if (Math.abs(nums[lo] + nums[hi] + nums[i] - target) < sub) {
+				sum = nums[lo] + nums[hi] + nums[i]
+				sub = Math.abs(sum - target)
+			}
+			if (nums[lo] + nums[hi] + nums[i] > target) {
+				hi--
+			} else {
+				lo++
+			}
+		}
+	}
+	return sum
+}
 ```
 
 
