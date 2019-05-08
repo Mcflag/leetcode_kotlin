@@ -19,14 +19,14 @@
 
 ```kotlin
 fun twoSum(nums: IntArray, target: Int): IntArray {
-	val numMap = mutableMapOf<Int, Int>()
-	for ((i, v) in nums.withIndex()) {
-		if (numMap.contains(v)) {
-			return intArrayOf(numMap[v]!!, i)
-		}
-		numMap[target - v] = i
-	}
-	return intArrayOf()
+  val numMap = mutableMapOf<Int, Int>()
+  for ((i, v) in nums.withIndex()) {
+    if (numMap.contains(v)) {
+      return intArrayOf(numMap[v]!!, i)
+    }
+    numMap[target - v] = i
+  }
+  return intArrayOf()
 }
 ```
 
