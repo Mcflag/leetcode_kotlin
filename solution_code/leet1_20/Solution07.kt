@@ -1,6 +1,6 @@
 package com.ccooy.testonly.leet1_20
 
-class Solution7 {
+class Solution07 {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
