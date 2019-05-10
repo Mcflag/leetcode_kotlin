@@ -1,7 +1,5 @@
 # 22.括号生成
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
 ## 题目：
 
 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
@@ -58,11 +56,12 @@ fun isValid(current: Array<Char>): Boolean {
 
 回溯法，只有在字符串有效的情况下才添加“(”和“)”，而不是全部生成完之后再检查是否有效。
 
-我们的复杂度分析依赖于理解 generateParenthesis(n) 中有多少个元素。事实证明这是第 n 个卡塔兰数 \dfrac{1}{n+1}\binom{2n}{n} ，这是由 \dfrac{4^n}{n\sqrt{n}} 渐近界定的。
+我们的复杂度分析依赖于理解 generateParenthesis(n) 中有多少个元素。事实证明这是第 n 个卡塔兰数 `(1/(n+1))*C(2n,n)`。
+实际上原理就是总共有的排列组合是`C(2n,n)`，但是其中无效的情况有`C(2n,n-1)`，那么总共的有效数是`C(2n,n)-C(2n,n-1) = (1/(n+1))*C(2n,n)`，它由 `(4^n)/(n*sqrt(n))` 渐近界定的。
 
-时间复杂度：O(\dfrac{4^n}{\sqrt{n}})，在回溯过程中，每个有效序列最多需要 n 步。
+时间复杂度：`O((4^n)/sqrt(n))`，在回溯过程中，每个有效序列最多需要 n 步。
 
-空间复杂度：O(\dfrac{4^n}{\sqrt{n}})，如上所述，并使用 O(n) 的空间来存储序列。
+空间复杂度：`O((4^n)/sqrt(n))`，如上所述，并使用 O(n) 的空间来存储序列。
 
 ```kotlin
 fun generateParenthesis(n: Int): List<String> {
